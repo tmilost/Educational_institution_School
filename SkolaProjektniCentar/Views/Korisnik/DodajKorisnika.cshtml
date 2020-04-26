@@ -1,0 +1,183 @@
+﻿@model SkolaProjektniCentar.ViewModel.KorisnikViewModel
+@{
+    ViewBag.Title = "Register";
+}
+<link href="~/Content/stil.css" rel="stylesheet" />
+<style>
+    
+        body
+        {
+            background: url('/Slike/img11.png') no-repeat;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+
+    .btn-default {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+        color: white;
+    }
+
+        .btn-default:hover {
+            background: white;
+            color: black;
+            box-shadow: 2px 2px black;
+            font-weight: 700;
+            border: 2px solid black;
+            transition: 0.6s;
+            transform: scale(1.2);
+        }
+    h2 {
+        font-weight: 800;
+        color: white;
+        text-shadow: 3px 3px black;
+        font-size: 38px;
+        padding-top: 1px;
+        padding-bottom: 22px;
+    }
+
+        .btn::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: red;
+            z-index: -1;
+            transition: 0.8s;
+        }
+
+        .btn::before {
+            top: 0;
+            border-radius: 0 0 50% 50%;
+        }
+
+    .btn1:hover::before {
+        height: 180%;
+    }
+    .btn-primary {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+        color: white;
+    }
+
+        .btn-primary:hover {
+            background: white;
+            color: black;
+            box-shadow: 2px 2px black;
+            font-weight: 700;
+            border: 2px solid black;
+            transition: 0.6s;
+            transform: scale(1.2);
+        }
+
+
+
+    /*   ------oci------   */
+
+    .eyes {
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translateY(-50%);
+        width: 50%;
+        text-align: center;
+    }
+
+    .eye {
+        width: 200px;
+        height: 100px;
+        background: white;
+        display: inline-block;
+        margin: 40px;
+        border-radius: 50%;
+        position: relative;
+        overflow: hidden;
+        border-top: 10px solid black;
+        border-bottom: 2px solid black;
+    }
+
+    .ball {
+        width: 40px;
+        height: 40px;
+        background: #000;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        border-radius: 50%;
+        border: 10px solid brown;
+    }
+</style>
+<h2>Dodaj novog korisnika</h2>
+
+@using (Html.BeginForm("DodajKorisnika", "Korisnik", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(m => m.KorisnickoIme, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.KorisnickoIme, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.KorisnickoIme)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Lozinka, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.Lozinka, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Lozinka)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PravoPristupa, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.PravoPristupa, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.PravoPristupa)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Sačuvaj" />
+            @Html.ActionLink("Nazad", "Index", new { id = Model.IdKorisnika }, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}
+
+<div class="eyes">
+    <div class="eye">
+        <div class="ball"> </div>
+    </div>
+    <div class="eye">
+        <div class="ball"> </div>
+    </div>
+</div>
+
+<script>
+    var balls = document.getElementsByClassName("ball");
+    document.onmousemove = function () {
+        var x = event.clientX * 100 / window.innerWidth + "%";
+        var y = event.clientY * 100 / window.innerHeight + "%";
+        //event.clientX => horizontalna koordinata
+        //event.clientY => vertikalna koordinata
+        //window.innerWidth => sirina
+        //window.innerHeight => visina
+
+        for (var i = 0; i < 2; i++) {
+            balls[i].style.left = x;
+            balls[i].style.top = y;
+            balls[i].style.transform = "translate(-" + x + ",-" + y + ")";
+        }
+    }</script>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,200 @@
+﻿@model IEnumerable<SkolaProjektniCentar.Korisnik>
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<link rel="stylesheet" href="../../stylesheets/coloringpage.css" type="text/css" media="screen, projection" />
+<link href="~/Content/stil.css" rel="stylesheet" />
+<style>
+
+    body {
+        background: url('/Slike/img11.png') no-repeat;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+    }
+
+    .btn-danger {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+        color: white;
+    }
+
+    .btn-danger:hover 
+    {
+        background: white;
+        color: black;
+        box-shadow: 2px 2px black;
+        font-weight: 700;
+        border: 2px solid black;
+        transition: 0.6s;
+        transform: scale(1.2);
+    }
+
+    h3 
+    {
+        font-weight: 800;
+        color: white;
+        text-shadow: 3px 3px black;
+        font-size: 38px;
+        padding-top: 1px;
+        padding-bottom: 22px;
+    }
+
+    table 
+    {
+        border-top: 2px solid black;
+    }
+
+    td 
+    {
+        font-size: 18px;
+        text-align: center;
+        color: #000000;
+    }
+
+    th 
+    {
+        font-size: 18px;
+        text-align: center;
+        margin-top: 100px;
+        border-top: 2px solid black;
+        border-bottom: 2px solid black;
+        color: #000000;
+    }
+
+    #thh 
+    {
+        border-left: 2px solid black;
+    }
+
+    #thh2 
+    {
+        border-right: 2px solid black;
+    }
+</style>
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<style>
+
+    body {
+        background: url('/Slike/img11.png') no-repeat;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+    }
+
+    .btn-danger {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+        color: white;
+    }
+
+        .btn-danger:hover {
+            background: white;
+            color: black;
+            box-shadow: 2px 2px black;
+            font-weight: 700;
+            border: 2px solid black;
+            transition: 0.6s;
+            transform: scale(1.2);
+        }
+
+    h3 {
+        font-weight: 800;
+        color: white;
+        text-shadow: 3px 3px black;
+        font-size: 38px;
+        padding-top: 1px;
+        padding-bottom: 22px;
+    }
+
+    table {
+        border-top: 2px solid black;
+    }
+
+    td {
+        font-size: 18px;
+        text-align: center;
+        color: #000000;
+    }
+
+    th {
+        font-size: 18px;
+        text-align: center;
+        margin-top: 100px;
+        border-top: 2px solid black;
+        border-bottom: 2px solid black;
+        color: #000000;
+    }
+
+    #th1 {
+        border-left: 2px solid black;
+    }
+
+    #th2 {
+        border-right: 2px solid black;
+    }
+
+    #printButton {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+        color: white;
+    }
+
+        #printButton:hover {
+            background: white;
+            color: black;
+            box-shadow: 2px 2px black;
+            font-weight: 700;
+            border: 2px solid black;
+            transition: 0.6s;
+            transform: scale(1.2);
+        }
+
+    a {
+        color: white;
+    }
+
+        a:hover {
+            color: black;
+        }
+</style>
+<p></p>
+<h3 style="text-align:center;">Spisak Korisnika</h3>
+<p> </p>
+<table class="table table-condensed">
+    <tr>
+        <th id="th1">Korisnicko ime</th>
+        <th>Lozinka</th>
+        <th>Pravo Pristupa</th>
+        <th id="th2"></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.KorisnickoIme)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lozinka)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PravoPristupa)
+            </td>
+        </tr>
+    }
+</table>
+<p>
+<p>Napomena:</p>
+    Korisnik sa pravom pregleda ima "Pravo Pristupa": 1
+</p>
+<p>Korisnik sa pravom unosa ima "Pravo Pristupa":  2 </p>
+<p> Korisnik sa pravom administracije ima "Pravo Pristupa":  3 </p>
+
+<button id="printButton"><a href="javascript:window.print()"><span class="glyphicon glyphicon-print"></span> Stampaj</a></button>

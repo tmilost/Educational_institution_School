@@ -1,0 +1,128 @@
+﻿@model IEnumerable<SkolaProjektniCentar.ViewModel.KontaktTelefonViewModel>
+
+@{
+    /**/
+
+    ViewBag.Title = "Detalji";
+}
+<link href="~/Content/stil.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+<style>
+    body {
+        background: url('/Slike/img11.png') no-repeat;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+    }
+
+    .btn-danger {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+        color: white;
+    }
+
+        .btn-danger:hover {
+            background: white;
+            color: black;
+            box-shadow: 2px 2px black;
+            font-weight: 700;
+            border: 2px solid black;
+            transition: 0.6s;
+            transform: scale(1.2);
+        }
+
+    h4 {
+        font-weight: 600;
+        color: white;
+        text-shadow: 3px 3px black;
+        font-size: 30px;
+        text-align: center;
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
+
+    table {
+        border-top: 2px solid black;
+    }
+
+    th {
+        font-size: 20px;
+        text-align: center;
+        margin-top: 100px;
+        border-top: 2px solid black;
+        border-bottom: 2px solid black;
+    }
+
+    #tab1 {
+        border-left: 2px solid black;
+        color: #000000;
+    }
+
+    #tab2 {
+        border-right: 2px solid black;
+    }
+
+    td {
+        font-size: 18px;
+        text-align: center;
+        font-weight: 800;
+        color: #000000;
+    }
+    #printButton {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+        color: white;
+    }
+
+        #printButton:hover {
+            background: white;
+            color: black;
+            box-shadow: 2px 2px black;
+            font-weight: 700;
+            border: 2px solid black;
+            transition: 0.6s;
+            transform: scale(1.2);
+        }
+
+    a {
+        color: white;
+    }
+
+        a:hover {
+            color: black;
+        }
+        #th1{
+            border-left: 2px solid black;
+        }
+</style>
+
+<p></p>
+<h4 style="text-align:center;">Telefoni</h4>
+<p></p>
+<table class="table table-condensed">
+    <tr>
+        <th id="th1">Broj telefona</th>
+        <th id="tab2" class="tab2">Lokal</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BrojTelefona)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lokal)
+        </td>
+
+    </tr>
+    }
+</table>
+
+<p>
+    @Html.ActionLink("Nazad", "Index", "Skola", new { @class = "btn btn-danger" })
+</p>

@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SkolaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="KontaktTelefon">
+          <Key>
+            <PropertyRef Name="IdTelefona" />
+          </Key>
+          <Property Name="IdTelefona" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BrojTelefona" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Lokal" Type="int" Nullable="false" />
+          <Property Name="IdTipaTelefona" Type="bigint" Nullable="false" />
+          <Property Name="IdOsobe" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Korisnik">
+          <Key>
+            <PropertyRef Name="IdKorisnika" />
+          </Key>
+          <Property Name="IdKorisnika" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KorisnickoIme" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Lozinka" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PravoPristupa" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MailListe">
+          <Key>
+            <PropertyRef Name="IdMaila" />
+          </Key>
+          <Property Name="IdMaila" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Adresa" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdTipaMaila" Type="bigint" Nullable="false" />
+          <Property Name="IdOsobe" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Osoba">
+          <Key>
+            <PropertyRef Name="IdOsobe" />
+          </Key>
+          <Property Name="IdOsobe" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ime" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Prezime" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RadnoMesto" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdSkole" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Skola">
+          <Key>
+            <PropertyRef Name="IdSkole" />
+          </Key>
+          <Property Name="IdSkole" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Adresa" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Opstina" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="PostanskiBroj" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaticniBroj" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="PIB" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="BrojRacuna" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="WebStranica" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pecat" Type="varchar(max)" Nullable="false" />
+          <Property Name="Beleska" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipMaila">
+          <Key>
+            <PropertyRef Name="IdTipaMaila" />
+          </Key>
+          <Property Name="IdTipaMaila" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tip" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipTelefona">
+          <Key>
+            <PropertyRef Name="IdTipaTelefona" />
+          </Key>
+          <Property Name="IdTipaTelefona" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tip" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_KontaktTelefon_Osoba">
+          <End Role="Osoba" Type="Self.Osoba" Multiplicity="1" />
+          <End Role="KontaktTelefon" Type="Self.KontaktTelefon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Osoba">
+              <PropertyRef Name="IdOsobe" />
+            </Principal>
+            <Dependent Role="KontaktTelefon">
+              <PropertyRef Name="IdOsobe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KontaktTelefon_TipTelefona">
+          <End Role="TipTelefona" Type="Self.TipTelefona" Multiplicity="1" />
+          <End Role="KontaktTelefon" Type="Self.KontaktTelefon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipTelefona">
+              <PropertyRef Name="IdTipaTelefona" />
+            </Principal>
+            <Dependent Role="KontaktTelefon">
+              <PropertyRef Name="IdTipaTelefona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MailListe_Osoba">
+          <End Role="Osoba" Type="Self.Osoba" Multiplicity="1" />
+          <End Role="MailListe" Type="Self.MailListe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Osoba">
+              <PropertyRef Name="IdOsobe" />
+            </Principal>
+            <Dependent Role="MailListe">
+              <PropertyRef Name="IdOsobe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MailListe_TipMaila">
+          <End Role="TipMaila" Type="Self.TipMaila" Multiplicity="1" />
+          <End Role="MailListe" Type="Self.MailListe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipMaila">
+              <PropertyRef Name="IdTipaMaila" />
+            </Principal>
+            <Dependent Role="MailListe">
+              <PropertyRef Name="IdTipaMaila" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Osoba_Skola">
+          <End Role="Skola" Type="Self.Skola" Multiplicity="1" />
+          <End Role="Osoba" Type="Self.Osoba" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skola">
+              <PropertyRef Name="IdSkole" />
+            </Principal>
+            <Dependent Role="Osoba">
+              <PropertyRef Name="IdSkole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SkolaModelStoreContainer">
+          <EntitySet Name="KontaktTelefon" EntityType="Self.KontaktTelefon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Korisnik" EntityType="Self.Korisnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MailListe" EntityType="Self.MailListe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Osoba" EntityType="Self.Osoba" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Skola" EntityType="Self.Skola" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipMaila" EntityType="Self.TipMaila" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipTelefona" EntityType="Self.TipTelefona" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_KontaktTelefon_Osoba" Association="Self.FK_KontaktTelefon_Osoba">
+            <End Role="Osoba" EntitySet="Osoba" />
+            <End Role="KontaktTelefon" EntitySet="KontaktTelefon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KontaktTelefon_TipTelefona" Association="Self.FK_KontaktTelefon_TipTelefona">
+            <End Role="TipTelefona" EntitySet="TipTelefona" />
+            <End Role="KontaktTelefon" EntitySet="KontaktTelefon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MailListe_Osoba" Association="Self.FK_MailListe_Osoba">
+            <End Role="Osoba" EntitySet="Osoba" />
+            <End Role="MailListe" EntitySet="MailListe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MailListe_TipMaila" Association="Self.FK_MailListe_TipMaila">
+            <End Role="TipMaila" EntitySet="TipMaila" />
+            <End Role="MailListe" EntitySet="MailListe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Osoba_Skola" Association="Self.FK_Osoba_Skola">
+            <End Role="Skola" EntitySet="Skola" />
+            <End Role="Osoba" EntitySet="Osoba" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SkolaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="KontaktTelefon">
+          <Key>
+            <PropertyRef Name="IdTelefona" />
+          </Key>
+          <Property Name="IdTelefona" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BrojTelefona" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Lokal" Type="Int32" Nullable="false" />
+          <Property Name="IdTipaTelefona" Type="Int64" Nullable="false" />
+          <Property Name="IdOsobe" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Osoba" Relationship="Self.FK_KontaktTelefon_Osoba" FromRole="KontaktTelefon" ToRole="Osoba" />
+          <NavigationProperty Name="TipTelefona" Relationship="Self.FK_KontaktTelefon_TipTelefona" FromRole="KontaktTelefon" ToRole="TipTelefona" />
+        </EntityType>
+        <EntityType Name="Korisnik">
+          <Key>
+            <PropertyRef Name="IdKorisnika" />
+          </Key>
+          <Property Name="IdKorisnika" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KorisnickoIme" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Lozinka" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PravoPristupa" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MailListe">
+          <Key>
+            <PropertyRef Name="IdMaila" />
+          </Key>
+          <Property Name="IdMaila" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdTipaMaila" Type="Int64" Nullable="false" />
+          <Property Name="IdOsobe" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Osoba" Relationship="Self.FK_MailListe_Osoba" FromRole="MailListe" ToRole="Osoba" />
+          <NavigationProperty Name="TipMaila" Relationship="Self.FK_MailListe_TipMaila" FromRole="MailListe" ToRole="TipMaila" />
+        </EntityType>
+        <EntityType Name="Osoba">
+          <Key>
+            <PropertyRef Name="IdOsobe" />
+          </Key>
+          <Property Name="IdOsobe" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ime" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prezime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RadnoMesto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdSkole" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="KontaktTelefons" Relationship="Self.FK_KontaktTelefon_Osoba" FromRole="Osoba" ToRole="KontaktTelefon" />
+          <NavigationProperty Name="MailListes" Relationship="Self.FK_MailListe_Osoba" FromRole="Osoba" ToRole="MailListe" />
+          <NavigationProperty Name="Skola" Relationship="Self.FK_Osoba_Skola" FromRole="Osoba" ToRole="Skola" />
+        </EntityType>
+        <EntityType Name="Skola">
+          <Key>
+            <PropertyRef Name="IdSkole" />
+          </Key>
+          <Property Name="IdSkole" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Adresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Opstina" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PostanskiBroj" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaticniBroj" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PIB" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BrojRacuna" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WebStranica" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pecat" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Beleska" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Osobas" Relationship="Self.FK_Osoba_Skola" FromRole="Skola" ToRole="Osoba" />
+        </EntityType>
+        <EntityType Name="TipMaila">
+          <Key>
+            <PropertyRef Name="IdTipaMaila" />
+          </Key>
+          <Property Name="IdTipaMaila" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tip" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="MailListes" Relationship="Self.FK_MailListe_TipMaila" FromRole="TipMaila" ToRole="MailListe" />
+        </EntityType>
+        <EntityType Name="TipTelefona">
+          <Key>
+            <PropertyRef Name="IdTipaTelefona" />
+          </Key>
+          <Property Name="IdTipaTelefona" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tip" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="KontaktTelefons" Relationship="Self.FK_KontaktTelefon_TipTelefona" FromRole="TipTelefona" ToRole="KontaktTelefon" />
+        </EntityType>
+        <Association Name="FK_KontaktTelefon_Osoba">
+          <End Role="Osoba" Type="Self.Osoba" Multiplicity="1" />
+          <End Role="KontaktTelefon" Type="Self.KontaktTelefon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Osoba">
+              <PropertyRef Name="IdOsobe" />
+            </Principal>
+            <Dependent Role="KontaktTelefon">
+              <PropertyRef Name="IdOsobe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KontaktTelefon_TipTelefona">
+          <End Role="TipTelefona" Type="Self.TipTelefona" Multiplicity="1" />
+          <End Role="KontaktTelefon" Type="Self.KontaktTelefon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipTelefona">
+              <PropertyRef Name="IdTipaTelefona" />
+            </Principal>
+            <Dependent Role="KontaktTelefon">
+              <PropertyRef Name="IdTipaTelefona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MailListe_Osoba">
+          <End Role="Osoba" Type="Self.Osoba" Multiplicity="1" />
+          <End Role="MailListe" Type="Self.MailListe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Osoba">
+              <PropertyRef Name="IdOsobe" />
+            </Principal>
+            <Dependent Role="MailListe">
+              <PropertyRef Name="IdOsobe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MailListe_TipMaila">
+          <End Role="TipMaila" Type="Self.TipMaila" Multiplicity="1" />
+          <End Role="MailListe" Type="Self.MailListe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipMaila">
+              <PropertyRef Name="IdTipaMaila" />
+            </Principal>
+            <Dependent Role="MailListe">
+              <PropertyRef Name="IdTipaMaila" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Osoba_Skola">
+          <End Role="Skola" Type="Self.Skola" Multiplicity="1" />
+          <End Role="Osoba" Type="Self.Osoba" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skola">
+              <PropertyRef Name="IdSkole" />
+            </Principal>
+            <Dependent Role="Osoba">
+              <PropertyRef Name="IdSkole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SkolaContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="KontaktTelefons" EntityType="Self.KontaktTelefon" />
+          <EntitySet Name="Korisniks" EntityType="Self.Korisnik" />
+          <EntitySet Name="MailListes" EntityType="Self.MailListe" />
+          <EntitySet Name="Osobas" EntityType="Self.Osoba" />
+          <EntitySet Name="Skolas" EntityType="Self.Skola" />
+          <EntitySet Name="TipMailas" EntityType="Self.TipMaila" />
+          <EntitySet Name="TipTelefonas" EntityType="Self.TipTelefona" />
+          <AssociationSet Name="FK_KontaktTelefon_Osoba" Association="Self.FK_KontaktTelefon_Osoba">
+            <End Role="Osoba" EntitySet="Osobas" />
+            <End Role="KontaktTelefon" EntitySet="KontaktTelefons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KontaktTelefon_TipTelefona" Association="Self.FK_KontaktTelefon_TipTelefona">
+            <End Role="TipTelefona" EntitySet="TipTelefonas" />
+            <End Role="KontaktTelefon" EntitySet="KontaktTelefons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MailListe_Osoba" Association="Self.FK_MailListe_Osoba">
+            <End Role="Osoba" EntitySet="Osobas" />
+            <End Role="MailListe" EntitySet="MailListes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MailListe_TipMaila" Association="Self.FK_MailListe_TipMaila">
+            <End Role="TipMaila" EntitySet="TipMailas" />
+            <End Role="MailListe" EntitySet="MailListes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Osoba_Skola" Association="Self.FK_Osoba_Skola">
+            <End Role="Skola" EntitySet="Skolas" />
+            <End Role="Osoba" EntitySet="Osobas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SkolaModelStoreContainer" CdmEntityContainer="SkolaContext">
+          <EntitySetMapping Name="KontaktTelefons">
+            <EntityTypeMapping TypeName="SkolaModel.KontaktTelefon">
+              <MappingFragment StoreEntitySet="KontaktTelefon">
+                <ScalarProperty Name="IdTelefona" ColumnName="IdTelefona" />
+                <ScalarProperty Name="BrojTelefona" ColumnName="BrojTelefona" />
+                <ScalarProperty Name="Lokal" ColumnName="Lokal" />
+                <ScalarProperty Name="IdTipaTelefona" ColumnName="IdTipaTelefona" />
+                <ScalarProperty Name="IdOsobe" ColumnName="IdOsobe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Korisniks">
+            <EntityTypeMapping TypeName="SkolaModel.Korisnik">
+              <MappingFragment StoreEntitySet="Korisnik">
+                <ScalarProperty Name="IdKorisnika" ColumnName="IdKorisnika" />
+                <ScalarProperty Name="KorisnickoIme" ColumnName="KorisnickoIme" />
+                <ScalarProperty Name="Lozinka" ColumnName="Lozinka" />
+                <ScalarProperty Name="PravoPristupa" ColumnName="PravoPristupa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MailListes">
+            <EntityTypeMapping TypeName="SkolaModel.MailListe">
+              <MappingFragment StoreEntitySet="MailListe">
+                <ScalarProperty Name="IdMaila" ColumnName="IdMaila" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="IdTipaMaila" ColumnName="IdTipaMaila" />
+                <ScalarProperty Name="IdOsobe" ColumnName="IdOsobe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Osobas">
+            <EntityTypeMapping TypeName="SkolaModel.Osoba">
+              <MappingFragment StoreEntitySet="Osoba">
+                <ScalarProperty Name="IdOsobe" ColumnName="IdOsobe" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+                <ScalarProperty Name="RadnoMesto" ColumnName="RadnoMesto" />
+                <ScalarProperty Name="IdSkole" ColumnName="IdSkole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Skolas">
+            <EntityTypeMapping TypeName="SkolaModel.Skola">
+              <MappingFragment StoreEntitySet="Skola">
+                <ScalarProperty Name="IdSkole" ColumnName="IdSkole" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="Opstina" ColumnName="Opstina" />
+                <ScalarProperty Name="PostanskiBroj" ColumnName="PostanskiBroj" />
+                <ScalarProperty Name="MaticniBroj" ColumnName="MaticniBroj" />
+                <ScalarProperty Name="PIB" ColumnName="PIB" />
+                <ScalarProperty Name="BrojRacuna" ColumnName="BrojRacuna" />
+                <ScalarProperty Name="WebStranica" ColumnName="WebStranica" />
+                <ScalarProperty Name="Pecat" ColumnName="Pecat" />
+                <ScalarProperty Name="Beleska" ColumnName="Beleska" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipMailas">
+            <EntityTypeMapping TypeName="SkolaModel.TipMaila">
+              <MappingFragment StoreEntitySet="TipMaila">
+                <ScalarProperty Name="IdTipaMaila" ColumnName="IdTipaMaila" />
+                <ScalarProperty Name="Tip" ColumnName="Tip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipTelefonas">
+            <EntityTypeMapping TypeName="SkolaModel.TipTelefona">
+              <MappingFragment StoreEntitySet="TipTelefona">
+                <ScalarProperty Name="IdTipaTelefona" ColumnName="IdTipaTelefona" />
+                <ScalarProperty Name="Tip" ColumnName="Tip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

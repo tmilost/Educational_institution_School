@@ -1,0 +1,132 @@
+﻿@model SkolaProjektniCentar.Osoba
+
+@{
+    ViewBag.Title = "Izbrisi";
+}
+<link href="~/Content/stil.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<style>
+
+    body {
+        background: url('/Slike/img11.png') no-repeat;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+    }
+
+
+
+    .btn-danger {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+        color: white;
+    }
+
+        .btn-danger:hover {
+            background: white;
+            color: black;
+            box-shadow: 2px 2px black;
+            font-weight: 700;
+            border: 2px solid black;
+            transition: 0.6s;
+            transform: scale(1.2);
+        }
+
+    .btn-default {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+        color: white;
+    }
+
+        .btn-default:hover {
+            background: white;
+            color: black;
+            box-shadow: 2px 2px black;
+            font-weight: 700;
+            border: 2px solid black;
+            transition: 0.6s;
+            transform: scale(1.2);
+        }
+
+    h2 {
+        font-weight: 600;
+        color: white;
+        text-shadow: 3px 3px black;
+        font-size: 40px;
+        padding-top: 20px;
+    }
+
+    h3 {
+        font-weight: 600;
+        color: white;
+        text-shadow: 3px 3px black;
+        font-size: 20px;
+    }
+
+    dt {
+        font-size: 18px;
+        text-align: center;
+        font-weight: 800;
+        color: #000000;
+    }
+
+    dd {
+        font-size: 18px;
+        font-weight: 800;
+        color: #000000;
+    }
+</style>
+<h2>Izbrisi</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+     
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prezime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prezime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RadnoMesto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RadnoMesto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Skola.Naziv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Skola.Naziv)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Izbrisi" class="btn btn-default" />
+        @Html.ActionLink("Nazad", "Index", "Osoba", new { @class = "btn btn-danger" })
+    </div>
+    }
+</div>

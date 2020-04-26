@@ -1,0 +1,148 @@
+﻿@model IEnumerable<SkolaProjektniCentar.Skola>
+
+@{
+    ViewBag.Title = "Index";
+}
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="~/Content/stil.css" rel="stylesheet" />
+<link rel="stylesheet" href="../../stylesheets/coloringpage.css" type="text/css" media="screen, projection" />
+
+
+<style>
+    body {
+        background: url('/Slike/img11.png') no-repeat;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+    }
+
+    .btn-danger {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+    }
+
+        .btn-danger:hover {
+            background: white;
+            color: black;
+            box-shadow: 2px 2px black;
+            font-weight: 700;
+            border: 2px solid black;
+            transition: 0.6s;
+            transform: scale(1.2);
+        }
+
+    h3 {
+        font-weight: 900;
+        color: white;
+        text-shadow: 3px 3px black;
+        font-size: 40px;
+        padding-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-top: 2px solid black;
+    }
+
+    .danger {
+        color: #000000;
+    }
+
+    #th3 {
+        padding-left: 50px;
+    }
+
+    th {
+        font-size: 18px;
+        text-align: center;
+        border-top: 2px solid black;
+        border-bottom: 2px solid black;
+        font-weight: bold;
+        color: #000000;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    td {
+        font-size: 18px;
+        text-align: center;
+        color: black;
+        font-weight: 800;
+    }
+
+    #th1 {
+        border-left: 2px solid black;
+    }
+
+    #th2 {
+        border-right: 2px solid black;
+    }
+
+    #printButton {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+        color: white;
+    }
+
+        #printButton:hover {
+            background: white;
+            color: black;
+            box-shadow: 2px 2px black;
+            font-weight: 700;
+            border: 2px solid black;
+            transition: 0.6s;
+            transform: scale(1.2);
+        }
+
+    a {
+        color: white;
+    }
+
+        a:hover {
+            color: black;
+        }
+</style>
+
+<p></p>
+<p style="text-align:right;">
+
+</p>
+<h3 style="text-align:center;">Spisak skola</h3>
+<p> </p>
+<table class="table table-condensed">
+    <div id="box2">
+        <tr>
+            <th id="th1">Naziv skole</th>
+            <th>Adresa</th>
+            <th>Opstina</th>
+            <th id="th2">Postanski broj</th>
+        </tr>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div id="box1">
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Naziv)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Adresa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Opstina)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostanskiBroj)
+                </td>
+
+
+            </tr>
+        </div>
+    }
+</table>
+<button id="printButton"><a href="javascript:window.print()"><span class="glyphicon glyphicon-print"></span> Stampaj</a></button>
+

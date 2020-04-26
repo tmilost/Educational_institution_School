@@ -1,0 +1,70 @@
+﻿@model SkolaProjektniCentar.ViewModel.MailListeViewModel
+<link href="~/Content/stil.css" rel="stylesheet" />
+<style>
+
+    body {
+        background: url('/Slike/img11.png') no-repeat;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+    }
+
+
+    .btn-danger {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+        color: white;
+    }
+
+        .btn-danger:hover {
+            background: white;
+            color: black;
+            box-shadow: 2px 2px black;
+            font-weight: 700;
+            border: 2px solid black;
+            transition: 0.6s;
+            transform: scale(1.2);
+        }
+
+
+    h4 {
+        font-weight: 900;
+        color: white;
+        text-shadow: 3px 3px black;
+        font-size: 40px;
+        padding-top: 10px;
+        padding-bottom: 5px;
+    }
+</style>
+
+<h4> @ViewBag.Title </h4>
+
+<h4 style="text-align:center;">Dodaj novi mail</h4>
+
+@using (Html.BeginForm("DodajMail", "MailListe"))
+{
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Osoba.Ime)
+            @Html.DropDownListFor(m => m.IdOsobe, new SelectList(Model.Osobe, "IdOsobe", "Ime"), "Izaberi osobu", new { @class = "form-control" })
+            @Html.ValidationMessage("Required")
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.TipMaila.Tip)
+            @Html.DropDownListFor(m => m.IdTipaMaila, new SelectList(Model.Tipovi, "IdTipaMaila", "Tip"), "Izaberi tip", new { @class = "form-control" })
+            @Html.ValidationMessage("Required")
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Adresa)
+            @Html.TextBoxFor(m => m.Adresa, new { @class = "form-control", id = "inputSuccess" })
+            @Html.ValidationMessageFor(m => m.Adresa)
+        </div>
+
+
+    </div>
+
+    <button type="submit" class="btn btn-danger">Sačuvaj</button>
+    @Html.ActionLink("Nazad", "Index", new { id = Model.IdMaila }, new { @class = "btn btn-danger" })
+}

@@ -1,0 +1,77 @@
+﻿
+@model SkolaProjektniCentar.ViewModel.TipTelefonaViewModel
+@{
+    ViewBag.Title = "DodajTipTelefona";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/stil.css" rel="stylesheet" />
+<style>
+    body {
+        background: url('/Slike/img11.png') no-repeat;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+    }
+
+
+    .btn-primary {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+        color: white;
+    }
+
+        .btn-primary:hover {
+            background: white;
+            color: black;
+            box-shadow: 2px 2px black;
+            font-weight: 700;
+            border: 2px solid black;
+            transition: 0.6s;
+            transform: scale(1.2);
+        }
+    .btn-danger {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+        color: white;
+    }
+
+        .btn-danger:hover {
+            background: white;
+            color: black;
+            box-shadow: 2px 2px black;
+            font-weight: 700;
+            border: 2px solid black;
+            transition: 0.6s;
+            transform: scale(1.2);
+        }
+
+
+    h2 {
+        font-weight: 900;
+        color: white;
+        text-shadow: 3px 3px black;
+        font-size: 40px;
+        padding-top: 10px;
+        padding-bottom: 5px;
+    }
+
+    h3 {
+        font-weight: 600;
+    }
+</style>
+
+<h2>Novi Tip Telefona</h2>
+
+@using (Html.BeginForm("DodajTipTelefona", "TipTelefona"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Tip)
+        @Html.TextBoxFor(m => m.Tip, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Tip)
+    </div>
+    <button type="submit" class="btn btn-primary">Sacuvaj</button>
+    @Html.ActionLink("Nazad", "Index", new { id = Model.IdTipaTelefona }, new { @class = "btn btn-danger" })
+}

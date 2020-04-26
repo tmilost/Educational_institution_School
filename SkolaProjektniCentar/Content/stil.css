@@ -1,0 +1,21 @@
+﻿.navbar-inverse .navbar-nav > li > a:hover {
+    transition: 0.6s;
+    transform: scale(1.4);
+}
+
+.navbar-inverse .navbar-brand:hover {
+    transition: 0.6s;
+    transform: scale(1.2);
+}
+
+.navbar-inverse .navbar-brand {
+    color: white;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: white;
+}
+
+.navbar-inverse {
+    background-color: #912222;
+}

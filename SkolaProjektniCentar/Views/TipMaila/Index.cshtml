@@ -1,0 +1,152 @@
+﻿@model IEnumerable<SkolaProjektniCentar.TipMaila>
+
+@{
+    ViewBag.Title = "Index";
+}
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<link href="~/Content/stil.css" rel="stylesheet" />
+<style>
+    body {
+        background: url('/Slike/img11.png') no-repeat;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+    }
+
+
+    .btn-default {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+        color: white;
+    }
+
+        .btn-default:hover {
+            background: white;
+            color: black;
+            box-shadow: 2px 2px black;
+            font-weight: 700;
+            border: 2px solid black;
+            transition: 0.6s;
+            transform: scale(1.2);
+        }
+
+    .btn-danger {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+        color: white;
+    }
+
+        .btn-danger:hover {
+            background: white;
+            color: black;
+            box-shadow: 2px 2px black;
+            font-weight: 700;
+            border: 2px solid black;
+            transition: 0.6s;
+            transform: scale(1.2);
+        }
+
+
+
+    h3 {
+        font-weight: 900;
+        color: white;
+        text-shadow: 3px 3px black;
+        font-size: 40px;
+        padding-top: 1px;
+        padding-bottom: 22px;
+    }
+
+    table {
+        border-top: 2px solid black;
+    }
+
+    #th1 {
+        border-left: 2px solid black;
+        border-bottom: 2px solid black;
+        border-top: 2px solid black;
+    }
+
+    #th2 {
+        border-right: 2px solid black;
+        border-bottom: 2px solid black;
+        border-top: 2px solid black;
+    }
+
+    td {
+        font-size: 18px;
+        text-align: center;
+        font-weight: 800;
+        color: #000000;
+    }
+
+    th {
+        font-size: 20px;
+        text-align: center;
+        margin-top: 100px;
+        border-top: 2px solid black;
+        border-bottom: 2px solid black;
+        color: #000000;
+    }
+    #printButton {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+        color: white;
+    }
+
+        #printButton:hover {
+            background: white;
+            color: black;
+            box-shadow: 2px 2px black;
+            font-weight: 700;
+            border: 2px solid black;
+            transition: 0.6s;
+            transform: scale(1.2);
+        }
+
+    a {
+        color: white;
+    }
+
+        a:hover {
+            color: black;
+        }
+</style>
+
+<p></p>
+<p style="text-align:right" ;>
+    @if ((int?)Session["PravoPristupa"] == 3 || (int?)Session["PravoPristupa"] == 2)
+    {@Html.ActionLink("NOVI TIP MAIL-A", "DodajTipMaila", "TipMaila", new { @class = "btn btn-danger" })
+}
+</p>
+<h3 style="text-align:center;">Tipovi mail-a</h3>
+
+
+<p> </p>
+<table class="table table-condensed">
+    <tr>
+        <th id="th1">Naziv tipa maila</th>
+        <th id="th2"></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tip)
+            </td>
+
+            <td>
+                @if ((int?)Session["PravoPristupa"] == 3)
+                {
+                    @Html.ActionLink("Izbrisi", "Izbrisi", new { id = item.IdTipaMaila }, new { @class = "btn btn-danger" })
+                }
+            </td>
+        </tr>
+    }
+</table>

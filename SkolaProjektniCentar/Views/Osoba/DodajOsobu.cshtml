@@ -1,0 +1,70 @@
+﻿@model SkolaProjektniCentar.ViewModel.OsobaViewModel
+
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<link href="~/Content/stil.css" rel="stylesheet" />
+<style>
+
+
+    body {
+        background: url('/Slike/img11.png') no-repeat;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+    }
+
+    .btn-danger {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+        color: white;
+    }
+
+        .btn-danger:hover {
+            background: white;
+            color: black;
+            box-shadow: 2px 2px black;
+            font-weight: 700;
+            border: 2px solid black;
+            transition: 0.6s;
+            transform: scale(1.2);
+        }
+
+    h4 {
+        font-weight: 600;
+        color: white;
+        text-shadow: 3px 3px black;
+        font-size: 30px;
+        padding-top: 20px;
+    }
+</style>
+
+<h4>Dodaj novu osobu</h4>
+
+@using (Html.BeginForm("DodajOsobu", "Osoba"))
+{
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Osoba.Ime)
+            @Html.TextBoxFor(m => m.Osoba.Ime, new { @class = "form-control", id = "inputSuccess" })
+            @Html.ValidationMessageFor(m => m.Osoba.Ime)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Osoba.Prezime)
+            @Html.TextBoxFor(m => m.Osoba.Prezime, new { @class = "form-control", id = "inputSuccess" })
+            @Html.ValidationMessageFor(m => m.Osoba.Prezime)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Osoba.RadnoMesto)
+            @Html.TextBoxFor(m => m.Osoba.RadnoMesto, new { @class = "form-control", id = "inputSuccess" })
+            @Html.ValidationMessageFor(m => m.Osoba.RadnoMesto)
+        </div>
+        <div class="form-group">Naziv skole
+            @Html.DropDownListFor(m => m.Osoba.IdSkole, new SelectList(Model.Skole, "IdSkole", "Naziv"), "Naziv skole", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Osoba.IdSkole)
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-danger">Sačuvaj</button>
+    @Html.ActionLink("Nazad", "Index", "Osoba", new { @class = "btn btn-danger" })
+}

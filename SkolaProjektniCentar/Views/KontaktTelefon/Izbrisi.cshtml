@@ -1,0 +1,116 @@
+﻿@model SkolaProjektniCentar.KontaktTelefon
+
+@{
+    ViewBag.Title = "Izbrisi";
+}
+
+<link href="~/Content/stil.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<style>
+
+    body {
+        background: url('/Slike/img11.png') no-repeat;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+    }
+
+    .btn-default {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+        color: white;
+    }
+
+    .btn-default:hover 
+    {
+        background: white;
+        color: black;
+        box-shadow: 2px 2px black;
+        font-weight: 700;
+        border: 2px solid black;
+        ransition: 0.6s;
+        transform: scale(1.2);
+    }
+
+    .btn-danger 
+    {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+        color: white;
+    }
+
+    .btn-danger:hover 
+    {
+        background: white;
+        color: black;
+        box-shadow: 2px 2px black;
+        font-weight: 700;
+        border: 2px solid black;
+        transition: 0.6s;
+        transform: scale(1.2);
+    }
+
+    h4 
+    {
+        font-weight: 900;
+        color: white;
+        text-shadow: 3px 3px black;
+        font-size: 40px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+</style>
+<h4>Izbrisi</h4>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Osoba.Ime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Osoba.Ime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipTelefona.Tip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipTelefona.Tip)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BrojTelefona)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BrojTelefona)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lokal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lokal)
+        </dd>
+
+
+
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default" />
+        @Html.ActionLink("Nazad", "Index", "KontaktTelefon", new { @class = "btn btn-danger" })
+    </div>
+    }
+</div>

@@ -1,0 +1,120 @@
+﻿@model SkolaProjektniCentar.ViewModel.SkolaViewModel
+
+@{
+    ViewBag.Title = "DodajSkolu";
+}
+<link href="~/Content/stil.css" rel="stylesheet" />
+<h2>Dodaj skolu</h2>
+<style>
+    .field-validation-error {
+        color: red;
+    }
+
+    body {
+        background: url('/Slike/img11.png') no-repeat;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+    }
+
+    .btn-default {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+    }
+
+        .btn-default:hover {
+            background: white;
+            color: black;
+            box-shadow: 2px 2px black;
+            font-weight: 700;
+            border: 2px solid black;
+            transition: 0.6s;
+            transform: scale(1.2);
+        }
+
+    .btn-danger {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+        color: white;
+    }
+
+        .btn-danger:hover {
+            background: white;
+            color: black;
+            box-shadow: 2px 2px black;
+            font-weight: 700;
+            border: 2px solid black;
+            transition: 0.6s;
+            transform: scale(1.2);
+        }
+
+    h2 {
+        font-weight: 900;
+        color: white;
+        text-shadow: 3px 3px black;
+        font-size: 40px;
+    }
+</style>
+
+@using (Html.BeginForm("DodajSkolu", "Skola", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Naziv)
+            @Html.TextBoxFor(m => m.Naziv, new { @class = "form-control", id = "inputSuccess" })
+            @Html.ValidationMessageFor(m => m.Naziv)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Adresa)
+            @Html.TextBoxFor(m => m.Adresa, new { @class = "form-control", id = "inputSuccess" })
+            @Html.ValidationMessageFor(m => m.Adresa)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Opstina)
+            @Html.TextBoxFor(m => m.Opstina, new { @class = "form-control", id = "inputSuccess" })
+            @Html.ValidationMessageFor(m => m.Opstina)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.PostanskiBroj)
+            @Html.TextBoxFor(m => m.PostanskiBroj, new { @class = "form-control", id = "inputSuccess" })
+            @Html.ValidationMessageFor(m => m.PostanskiBroj)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.MaticniBroj)
+            @Html.TextBoxFor(m => m.MaticniBroj, new { @class = "form-control", id = "inputSuccess" })
+            @Html.ValidationMessageFor(m => m.MaticniBroj)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.PIB)
+            @Html.TextBoxFor(m => m.PIB, new { @class = "form-control", id = "inputSuccess" })
+            @Html.ValidationMessageFor(m => m.PIB)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.BrojRacuna)
+            @Html.TextBoxFor(m => m.BrojRacuna, new { @class = "form-control", id = "inputSuccess" })
+            @Html.ValidationMessageFor(m => m.BrojRacuna)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.WebStranica)
+            @Html.TextBoxFor(m => m.WebStranica, new { @class = "form-control", id = "inputSuccess" })
+            @Html.ValidationMessageFor(m => m.WebStranica)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ImageUpload)
+            @Html.TextBoxFor(m => m.ImageUpload, new { type = "file" })
+
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Beleska)
+            @Html.TextBoxFor(m => m.Beleska, new { @class = "form-control", id = "inputSuccess" })
+            @Html.ValidationMessageFor(m => m.Beleska)
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-danger">Sačuvaj</button>
+    @Html.ActionLink("Nazad", "Index", new { id = Model.IdSkole }, new { @class = "btn btn-danger" })
+}

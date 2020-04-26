@@ -1,0 +1,73 @@
+﻿@model SkolaProjektniCentar.ViewModel.KontaktTelefonViewModel
+<link href="~/Content/stil.css" rel="stylesheet" />
+<style>
+
+    body {
+        background: url('/Slike/img11.png') no-repeat;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+    }
+
+    .btn-danger {
+        background: #912222;
+        font-weight: 600;
+        margin: 10px;
+        border: 2px solid black;
+        color: white;
+    }
+
+    .btn-danger:hover 
+    {
+        background: white;
+        color: black;
+        box-shadow: 2px 2px black;
+        font-weight: 700;
+        border: 2px solid black;
+        transition: 0.6s;
+        transform: scale(1.2);
+    }
+
+    h4 
+    {
+        font-weight: 900;
+        color: white;
+        text-shadow: 3px 3px black;
+        font-size: 40px;
+        padding-top: 10px;
+    }
+</style>
+<h4> @ViewBag.Title </h4>
+
+<h4>Dodaj novi telefon</h4>
+
+@using (Html.BeginForm("DodajTelefon", "KontaktTelefon"))
+{
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.KontaktTelefon.IdOsobe)
+            @Html.DropDownListFor(m => m.KontaktTelefon.IdOsobe, new SelectList(Model.Osobe, "IdOsobe", "Ime"), "Izaberi osobu", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.KontaktTelefon.IdOsobe)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.KontaktTelefon.IdTipaTelefona)
+            @Html.DropDownListFor(m => m.KontaktTelefon.IdTipaTelefona, new SelectList(Model.Tipovi, "IdTipaTelefona", "Tip"), "Izaberi tip", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.KontaktTelefon.IdTipaTelefona)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.KontaktTelefon.BrojTelefona)
+            @Html.TextBoxFor(m => m.KontaktTelefon.BrojTelefona, new { @class = "form-control", id = "inputSuccess" })
+            @Html.ValidationMessageFor(m => m.KontaktTelefon.BrojTelefona)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.KontaktTelefon.Lokal)
+            @Html.TextBoxFor(m => m.KontaktTelefon.Lokal, new { @class = "form-control", id = "inputSuccess" })
+            @Html.ValidationMessageFor(m => m.KontaktTelefon.Lokal)
+        </div>
+
+
+    </div>
+
+    <button type="submit" class="btn btn-danger">Sačuvaj</button>
+    @Html.ActionLink("Nazad", "Index", new { id = Model.IdTelefona }, new { @class = "btn btn-danger" })
+}

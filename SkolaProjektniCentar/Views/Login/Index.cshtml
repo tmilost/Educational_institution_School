@@ -1,0 +1,182 @@
+﻿
+@model SkolaProjektniCentar.Korisnik
+
+<div id="particles-js"></div>
+
+<script type="text/javascript" src="~/Scripts/particles.js"></script>
+<script src="~/Scripts/app.js" defer="defer"></script>
+
+
+@*<script>
+            function Validan() {
+                 @if ((int?)Session["KorisnickoIme"] ==  || (int?)Session["PravoPristupa"] == 2)
+                 {
+                     @Html.ValidationMessage("Pogresno korisnicko ime ili lozinka")
+                 }
+
+
+            }
+    </script>*@
+
+
+<div>
+    <style>
+
+        body {
+            background: #af0a0a;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            overflow-y: auto;
+            font-family: sans-serif;
+            color: white;
+        }
+
+        canvas {
+            background: #af0a0a;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            position: fixed;
+            z-index: -1;
+        }
+
+        #forma {
+            margin: 0 auto;
+            width: 50%;
+        }
+
+        h4 {
+            margin-left: -750px;
+            padding: 13px 0;
+            font-size: 35px;
+            font-weight: 700;
+        }
+
+        .form-control {
+            width: 100%;
+            overflow: hidden;
+            font-size: 20px;
+            border-bottom: 3px solid #560404;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 5px;
+            position: relative;
+            background: none;
+            overflow: hidden;
+            border: 4px solid #560404;
+            color: white;
+            font-size: 18px;
+            margin-right: 50%;
+            transition: 0.8s;
+            cursor: pointer;
+        }
+
+            .btn:hover {
+                color: #560404;
+                font-weight: 900;
+            }
+
+            .btn::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                width: 100%;
+                height: 0%;
+                background: red;
+                z-index: -1;
+                transition: 0.8s;
+            }
+
+            .btn::before {
+                top: 0;
+                border-radius: 0 0 50% 50%;
+            }
+
+        .btn1:hover::before {
+            height: 180%;
+        }
+
+        #registracija {
+            font-size: 20px;
+            color: white;
+        }
+
+        a {
+            color: white;
+        }
+
+            a:hover {
+                color: black;
+            }
+
+        .row {
+            text-align: center;
+        }
+
+        #form1 {
+            padding-top: 50px;
+        }
+
+        .checkbox {
+            margin-left: -65%;
+        }
+
+        #KorisnickoIme-error {
+            color: white;
+            margin-left: -100px;
+        }
+
+        #Lozinka-error {
+            color: white;
+            margin-left: -100px;
+        }
+        .field-validation-error {
+            color: white;
+            margin-left: -100px;
+        }
+    </style>
+</div>
+
+<div class="row">
+    <div id="log" class="col-md-12">
+        <section id="loginForm">
+            @using (Html.BeginForm("Authorize", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4>Ulogujte se</h4>
+                <hr />
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div id="forma">
+                    <div id="form1" class="form-group">
+                        @Html.LabelFor(m => m.KorisnickoIme, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.KorisnickoIme, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.KorisnickoIme, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Lozinka, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.PasswordFor(m => m.Lozinka, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Lozinka, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="field-validation-error">@Html.DisplayFor(Model => Model.LoginError)</label>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Ulogujte se" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </section>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
