@@ -1,6 +1,8 @@
 # Educational_institution_School
 ASP.NET MVC + Bootstrap + SQL // This application is for ministry that will take care of the registration of the school and its employees
 
+Look Documentation
+
 # Opis razvijene aplikacije
 
 Ova aplikacija je namenjena za obrazovnu ustanovu, tačnije za ministarstvo koje će voditi računa o registraciji škole i njenim zaposlenima. 
